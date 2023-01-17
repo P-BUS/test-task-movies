@@ -16,6 +16,7 @@ class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +29,11 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = binding.recyclerView
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }
