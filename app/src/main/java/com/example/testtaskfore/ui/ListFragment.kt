@@ -5,28 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.testtaskfore.R
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.RecyclerView
+import com.example.testtaskfore.databinding.ListFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ListFragment()
-    }
-
-    private lateinit var viewModel: PhotoViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PhotoViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+    private val sharedViewModel: PhotoViewModel by activityViewModels()
+    private lateinit var binding: ListFragmentBinding
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        binding = ListFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = binding.recyclerView
     }
 
 }
