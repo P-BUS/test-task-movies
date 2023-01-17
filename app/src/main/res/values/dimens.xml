@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_high">300dp</dimen>
+    <dimen name="margin_between_photos">4dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="internal_padding">4dp</dimen>
+
+
+</resources>
