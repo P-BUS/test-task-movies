@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.ListFragmentBinding
+import com.example.testtaskfore.ui.adapters.PhotoListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +18,6 @@ class ListFragment : Fragment() {
     private val sharedViewModel: PhotoViewModel by activityViewModels()
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +31,14 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = binding.recyclerView
+        val adapter = PhotoListAdapter { currentPhoto ->
+            sharedViewModel.updateCurrentPhoto(currentPhoto)
+            findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
+
+
+        }
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
 
 }
