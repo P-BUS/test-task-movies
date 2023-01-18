@@ -10,22 +10,13 @@ import com.example.testtaskfore.data.model.User
 data class PhotosEntity(
     @PrimaryKey
     val id: String,
-    @ColumnInfo(name = "blur_hash")
-    val blurHash: String,
-    val color: String,
     @ColumnInfo(name = "created_at")
-    val createdAt: String,
-   /* @ColumnInfo(name = "current_user_collections")
-    val currentUserCollections: List<CurrentUserCollection>,*/
-    val description: String,
-    val height: Int,
+    val createdAt: String?,
+    val description: String?,
+    val altDescription: String?,
     @ColumnInfo(name = "liked_by_user")
-    val likedByUser: Boolean,
-    val likes: Int,
-    //val links: Links,
-    @ColumnInfo(name = "updated_at")
-    val updatedAt: String,
-    val urls: Urls,
-    //val user: User,
-    val width: Int
+    val likedByUser: Boolean?,
+    val likes: Int?,
+    val urls: Urls?,
+    val user: User?
 )

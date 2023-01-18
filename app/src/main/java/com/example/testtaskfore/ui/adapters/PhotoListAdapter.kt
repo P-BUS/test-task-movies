@@ -16,8 +16,10 @@ class PhotoListAdapter(
     class ListViewHolder(private var binding: ItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(photo: UnsplashPhoto) {
-                binding.imageDescription.text = photo.description
-                CoilImageLoader.loadImage(binding.unsplashImage, photo.urls.small)
+                //binding.imageDescription.text = photo.altDescription
+                photo.urls?.small?.let {
+                    CoilImageLoader.loadImage(binding.unsplashImage, it)
+                }
             }
         }
 

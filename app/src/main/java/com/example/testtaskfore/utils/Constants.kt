@@ -6,4 +6,7 @@ object Constants {
     const val ENDPOINT = "photos"
     const val ACCESS_KEY = "cVHLHASj27DThAPTGCetJ3wj-1evc8lLk6dKF7TWAqE"
     const val SECRET_KEY = "ZWEO8kwAEaQd74OFzq9HKxsqx3wwfv5hgL2efGaVr90"
+
+    const val EMPTY_STRING = "No data"
+    const val EMPTY_INT = 0
 }
