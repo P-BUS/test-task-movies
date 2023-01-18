@@ -1,15 +1,28 @@
 package com.example.testtaskfore.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.testtaskfore.data.model.UnsplashPhoto
+import androidx.lifecycle.viewModelScope
+import com.example.testtaskfore.data.repository.PhotosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class PhotoViewModel : ViewModel() {
+class PhotoViewModel @Inject constructor(
+    private val repository: PhotosRepository
+) : ViewModel() {
 
 
-    fun updateCurrentBook(book: UnsplashPhoto) {
-        _currentBook.value = book
+    init {
+        getPhotos()
     }
 
+    val photos = repository.listPhotos
+
+
+    fun getPhotos() {
+        viewModelScope.launch {
+            repository.getPhotos()
+        }
+    }
 }
