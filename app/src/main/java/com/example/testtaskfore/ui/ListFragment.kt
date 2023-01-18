@@ -34,13 +34,12 @@ class ListFragment : Fragment() {
         recyclerView = binding.recyclerView
         recyclerView.layoutManager =
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+
         val adapter = PhotoListAdapter { currentPhoto ->
             sharedViewModel.updateCurrentPhoto(currentPhoto)
             findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
-
-
         }
-
+        recyclerView.adapter = adapter
     }
 
 
