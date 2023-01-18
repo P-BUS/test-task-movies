@@ -12,7 +12,7 @@ interface PhotoApiService {
     suspend fun getPhotos(
         @Query("client_id") clientId: String = ACCESS_KEY,
         @Query("page") pageNumber: Int = 1,
-        @Query("per_page") itemsPerPage: Int = 2,
+        @Query("per_page") itemsPerPage: Int = 10,
         @Query("order_by") sort: String = "popular"
     ): UnsplashPhotosResponse
 
