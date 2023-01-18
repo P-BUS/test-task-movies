@@ -26,7 +26,7 @@ class PhotosRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             // Retrieve photos from network
             // TODO: to add safe response handling if will be time
-            val listPhotos: List<UnsplashPhoto> = network.getAllPhotos()
+            val listPhotos: List<UnsplashPhoto> = network.getPhotos()
             // Update database
             database.photosDao().insertAll(listPhotos.asDatabaseModel())
         }

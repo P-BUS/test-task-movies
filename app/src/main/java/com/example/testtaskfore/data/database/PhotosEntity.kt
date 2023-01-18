@@ -3,7 +3,6 @@ package com.example.testtaskfore.data.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.testtaskfore.data.model.Links
 import com.example.testtaskfore.data.model.Urls
 import com.example.testtaskfore.data.model.User
 
@@ -23,10 +22,10 @@ data class PhotosEntity(
     @ColumnInfo(name = "liked_by_user")
     val likedByUser: Boolean,
     val likes: Int,
-    val links: Links,
+    //val links: Links,
     @ColumnInfo(name = "updated_at")
     val updatedAt: String,
     val urls: Urls,
-    val user: User,
+    //val user: User,
     val width: Int
 )

@@ -9,11 +9,10 @@ import retrofit2.http.Query
 
 interface PhotoApiService {
     @GET(ENDPOINT)
-    suspend fun getAllPhotos(
-        @Header("Authorization: Client-ID $ACCESS_KEY")
+    suspend fun getPhotos(
         @Query("client_id") clientId: String = ACCESS_KEY,
         @Query("page") pageNumber: Int = 1,
-        @Query("per_page") itemsPerPage: Int = 20,
+        @Query("per_page") itemsPerPage: Int = 2,
         @Query("order_by") sort: String = "popular"
     ): UnsplashPhotosResponse
 

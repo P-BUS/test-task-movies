@@ -4,24 +4,24 @@ import com.squareup.moshi.Json
 
 data class UnsplashPhoto(
     @Json(name = "blur_hash")
-    val blurHash: String,
-    val color: String,
+    val blurHash: String = "",
+    val color: String = "",
     @Json(name = "created_at")
-    val createdAt: String,
+    val createdAt: String = "",
   /*  @Json(name = "current_user_collections")
     val currentUserCollections: List<CurrentUserCollection>,*/
-    val description: String,
-    val height: Int,
-    val id: String,
+    val description: String = "",
+    val height: Int = 0,
+    val id: String = "",
     @Json(name = "liked_by_user")
     val likedByUser: Boolean,
-    val likes: Int,
-    val links: Links,
+    val likes: Int = 0,
+    //val links: Links,
     @Json(name = "updated_at")
-    val updatedAt: String,
+    val updatedAt: String = "",
     val urls: Urls,
-    val user: User,
-    val width: Int
+    //val user: User,
+    val width: Int = 0
 )
 
 /*data class CurrentUserCollection(
@@ -38,54 +38,54 @@ data class UnsplashPhoto(
     val user: Any
 )*/
 
-data class Links(
-    val download: String,
+/*data class Links(
+    val download: String = "",
     @Json(name = "download_location")
-    val downloadLocation: String,
-    val html: String,
-    val self: String
-)
+    val downloadLocation: String = "",
+    val html: String = "",
+    val self: String = ""
+)*/
 
 data class Urls(
-    val full: String,
-    val raw: String,
-    val regular: String,
-    val small: String,
-    val thumb: String
+    val full: String = "",
+    val raw: String = "",
+    val regular: String = "",
+    val small: String = "",
+    val thumb: String = ""
 )
 
 data class User(
-    val bio: String,
-    val id: String,
-    @Json(name = "instagram_username") val instagram_username: String,
+    val bio: String = "",
+    val id: String = "",
+    @Json(name = "instagram_username") val instagram_username: String = "",
     val links: LinksX,
-    val location: String,
-    val name: String,
+    val location: String = "",
+    val name: String = "",
     @Json(name = "portfolio_url")
-    val portfolioUrl: String,
+    val portfolioUrl: String = "",
     @Json(name = "profile_image")
     val profileImage: ProfileImage,
     @Json(name = "total_collections")
-    val totalCollections: Int,
+    val totalCollections: Int = 0,
     @Json(name = "total_likes")
-    val totalLikes: Int,
+    val totalLikes: Int = 0,
     @Json(name = "total_photos")
-    val totalPhotos: Int,
+    val totalPhotos: Int = 0,
     @Json(name = "twitter_username")
-    val twitterUsername: String,
-    val username: String
+    val twitterUsername: String = "",
+    val username: String = ""
 )
 
 data class LinksX(
-    val html: String,
-    val likes: String,
-    val photos: String,
-    val portfolio: String,
-    val self: String
+    val html: String = "",
+    val likes: String = "",
+    val photos: String = "",
+    val portfolio: String = "",
+    val self: String = ""
 )
 
 data class ProfileImage(
-    val large: String,
-    val medium: String,
-    val small: String
+    val large: String = "",
+    val medium: String = "",
+    val small: String = ""
 )

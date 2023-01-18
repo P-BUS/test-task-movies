@@ -14,10 +14,10 @@ fun List<PhotosEntity>.asDomainModel(): List<UnsplashPhoto> {
         id = it.id,
         likedByUser = it.likedByUser,
         likes = it.likes,
-        links = it.links,
+        //links = it.links,
         updatedAt = it.updatedAt,
         urls = it.urls,
-        user = it.user,
+        //user = it.user,
         width = it.width
         )
     }
@@ -34,10 +34,10 @@ fun List<UnsplashPhoto>.asDatabaseModel(): List<PhotosEntity> {
             id = it.id,
             likedByUser = it.likedByUser,
             likes = it.likes,
-            links = it.links,
+            //links = it.links,
             updatedAt = it.updatedAt,
             urls = it.urls,
-            user = it.user,
+            //user = it.user,
             width = it.width
         )
     }
