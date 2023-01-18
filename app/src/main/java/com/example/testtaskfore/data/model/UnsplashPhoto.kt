@@ -8,8 +8,8 @@ data class UnsplashPhoto(
     val color: String,
     @Json(name = "created_at")
     val createdAt: String,
-    @Json(name = "current_user_collections")
-    val currentUserCollections: List<CurrentUserCollection>,
+  /*  @Json(name = "current_user_collections")
+    val currentUserCollections: List<CurrentUserCollection>,*/
     val description: String,
     val height: Int,
     val id: String,
@@ -24,7 +24,7 @@ data class UnsplashPhoto(
     val width: Int
 )
 
-data class CurrentUserCollection(
+/*data class CurrentUserCollection(
     @Json(name = "cover_photo")
     val coverPhoto: Any,
     val id: Int,
@@ -36,7 +36,7 @@ data class CurrentUserCollection(
     @Json(name = "updated_at") val
     updatedAt: String,
     val user: Any
-)
+)*/
 
 data class Links(
     val download: String,

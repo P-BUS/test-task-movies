@@ -2,6 +2,7 @@ package com.example.testtaskfore.data.database
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -12,4 +13,7 @@ interface PhotosDao {
 
     @Query("SELECT * FROM photos_database WHERE id = :id")
     fun getBook(id: String): Flow<PhotosEntity>
+
+    @Upsert
+    fun insertAll(photos: List<PhotosEntity>)
 }

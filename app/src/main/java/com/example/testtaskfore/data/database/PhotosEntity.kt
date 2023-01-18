@@ -3,7 +3,6 @@ package com.example.testtaskfore.data.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.testtaskfore.data.model.CurrentUserCollection
 import com.example.testtaskfore.data.model.Links
 import com.example.testtaskfore.data.model.Urls
 import com.example.testtaskfore.data.model.User
@@ -17,8 +16,8 @@ data class PhotosEntity(
     val color: String,
     @ColumnInfo(name = "created_at")
     val createdAt: String,
-    @ColumnInfo(name = "current_user_collections")
-    val currentUserCollections: List<CurrentUserCollection>,
+   /* @ColumnInfo(name = "current_user_collections")
+    val currentUserCollections: List<CurrentUserCollection>,*/
     val description: String,
     val height: Int,
     @ColumnInfo(name = "liked_by_user")
