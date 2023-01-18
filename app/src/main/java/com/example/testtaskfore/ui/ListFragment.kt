@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.ListFragmentBinding
 import com.example.testtaskfore.ui.adapters.PhotoListAdapter
@@ -31,6 +32,8 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = binding.recyclerView
+        recyclerView.layoutManager =
+            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         val adapter = PhotoListAdapter { currentPhoto ->
             sharedViewModel.updateCurrentPhoto(currentPhoto)
             findNavController().navigate(R.id.action_listFragment_to_detailsFragment)

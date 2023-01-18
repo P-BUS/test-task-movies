@@ -5,6 +5,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        // integrates UnsplashPhotoPicker
+        maven { url 'https://jitpack.io' }
     }
 }
 
