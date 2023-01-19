@@ -59,9 +59,9 @@ class DetailsFragment : Fragment() {
 
     private fun setLikeImage(current_photo: UnsplashPhoto) {
         if (current_photo.likedByUser == true) {
-            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_24)
+            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_48)
         } else {
-            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
+            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_border_48)
         }
     }
 

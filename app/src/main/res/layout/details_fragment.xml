@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.DetailsFragment">
 
-    <ImageView
-        android:id="@+id/iv_detailed_image"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
 
     <ImageView
         android:id="@+id/iv_favorite"
@@ -26,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_detailed_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/cardview_light_background"
-        tools:src="@drawable/baseline_favorite_24" />
+        tools:src="@drawable/baseline_favorite_48" />
 
     <ImageView
         android:id="@+id/iv_share"
@@ -38,7 +29,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_detailed_image"
         app:tint="@color/cardview_light_background"
-        tools:src="@drawable/baseline_share_24" />
+        tools:src="@drawable/baseline_share_48" />
+
+    <ImageView
+        android:id="@+id/iv_detailed_image"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/tv_image_description"
