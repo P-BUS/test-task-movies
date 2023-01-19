@@ -14,7 +14,7 @@ interface PhotosDao {
     @Query("SELECT * FROM photos_database WHERE id = :id")
     fun getBook(id: String): Flow<PhotosEntity>
 
-    @Query("UPDATE photos_database SET likedByUser = :isLiked WHERE id = :id")
+    @Query("UPDATE photos_database SET liked_by_user = :isLiked WHERE id = :id")
     fun saveLikesInDatabase(id: String, isLiked: Boolean)
 
     @Upsert
