@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.DetailsFragmentBinding
+import com.example.testtaskfore.utils.CoilImageLoader
 
 class DetailsFragment : Fragment() {
     private val sharedViewModel: PhotoViewModel by activityViewModels()
@@ -30,8 +29,14 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bindPhoto()
     }
-
+    // TODO: to refactor null and duplicates
     private fun bindPhoto() {
+        sharedViewModel.currentPhoto.value?.urls?.full?.let {
+            CoilImageLoader.loadImage(binding.ivDetailedImage, it)
+        }
+        binding.tvAuthorName.text = sharedViewModel.currentPhoto.value?.description
+        binding.tvAuthorName.text = sharedViewModel.currentPhoto.value?.user?.name
+        binding.tvAuthorName.text = sharedViewModel.currentPhoto.value?.user?.name
 
     }
 
