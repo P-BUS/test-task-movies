@@ -1,4 +1,4 @@
-package com.example.testtaskfore.utils
+package com.example.testtaskfore.data.model.utils
 
 import com.example.testtaskfore.data.database.PhotosEntity
 import com.example.testtaskfore.data.model.UnsplashPhoto

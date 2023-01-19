@@ -11,8 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.testtaskfore.R
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.DetailsFragmentBinding
-import com.example.testtaskfore.utils.CoilImageLoader
-import com.example.testtaskfore.utils.SnackbarsUtils
+import com.example.testtaskfore.data.model.utils.CoilImageLoader
 import com.google.android.material.snackbar.Snackbar
 
 class DetailsFragment : Fragment() {
@@ -33,8 +32,8 @@ class DetailsFragment : Fragment() {
         bindPhoto()
         binding.ivFavorite.setOnClickListener {
             onLikeClicked(sharedViewModel.currentPhoto)
-            showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT,
-                findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment))
+            showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT
+            ) { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
         }
     }
 
@@ -81,11 +80,11 @@ class DetailsFragment : Fragment() {
 
     }
 
-    private fun showSnackbar(view: View, message: Int, length: Int, action: Unit) {
+    private fun showSnackbar(view: View, message: Int, length: Int, action: () -> Unit) {
         Snackbar
             .make(view, message, length)
             .setAction(R.string.action_text) {
-                action
+                action()
             }
             .show()
     }

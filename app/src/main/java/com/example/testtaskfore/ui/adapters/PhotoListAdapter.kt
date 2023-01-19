@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.ItemViewBinding
-import com.example.testtaskfore.utils.CoilImageLoader
+import com.example.testtaskfore.data.model.utils.CoilImageLoader
 
 class PhotoListAdapter(
     private val onItemClicked: (UnsplashPhoto) -> Unit
