@@ -22,8 +22,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/iv_detailed_image"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="@dimen/margin_medium"
         tools:text="Description of the image" />
+
+    <TextView
+        android:id="@+id/tv_author_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_image_description"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_medium"
+        tools:text="Anrew McCalister" />
+
+    <TextView
+        android:id="@+id/tv_created_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        app:layout_constraintBottom_toBottomOf="@id/tv_author_name"
+        app:layout_constraintStart_toEndOf="@id/tv_author_name"
+        app:layout_constraintTop_toTopOf="@id/tv_author_name"
+        tools:text="25/12/23" />
+
+
 
 
 
