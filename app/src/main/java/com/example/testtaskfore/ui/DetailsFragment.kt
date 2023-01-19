@@ -29,15 +29,25 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bindPhoto()
     }
-    // TODO: to refactor null and duplicates
-    private fun bindPhoto() {
-        sharedViewModel.currentPhoto.value?.urls?.full?.let {
-            CoilImageLoader.loadImage(binding.ivDetailedImage, it)
-        }
-        binding.tvAuthorName.text = sharedViewModel.currentPhoto.value?.description
-        binding.tvAuthorName.text = sharedViewModel.currentPhoto.value?.user?.name
-        binding.tvAuthorName.text = sharedViewModel.currentPhoto.value?.user?.name
 
+    private fun bindPhoto() {
+        with(sharedViewModel.currentPhoto.value) {
+            this?.urls?.full?.let {
+                CoilImageLoader.loadImage(binding.ivDetailedImage, it)
+            }
+            this?.description?.let {
+                binding.tvImageDescription.text = it
+            }
+            this?.user?.name?.let {
+                binding.tvAuthorName.text = it
+            }
+            this?.createdAt?.let {
+                binding.tvCreatedDate.text = it
+            }
+            this?.likes?.let {
+                binding.tvLikesQuantity.text = it.toString()
+            }
+        }
     }
 
 }

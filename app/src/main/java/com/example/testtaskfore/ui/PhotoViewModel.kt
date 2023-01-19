@@ -55,7 +55,7 @@ class PhotoViewModel @Inject constructor(
         }
     }
 
-    fun updateCurrentPhoto(book: UnsplashPhoto) {
-        _currentPhoto.value = book
+    fun updateCurrentPhoto(photo: UnsplashPhoto) {
+        _currentPhoto.value = photo
     }
 }
