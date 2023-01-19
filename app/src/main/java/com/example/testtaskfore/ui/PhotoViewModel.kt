@@ -58,4 +58,11 @@ class PhotoViewModel @Inject constructor(
     fun updateCurrentPhoto(photo: UnsplashPhoto) {
         _currentPhoto.value = photo
     }
+
+    fun saveLikesInDatabase(id: String, isLiked: Boolean) {
+        viewModelScope.launch {
+            repository.saveLikesInDatabase(id, isLiked)
+        }
+    }
+
 }

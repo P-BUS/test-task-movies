@@ -31,4 +31,10 @@ class PhotosRepository @Inject constructor(
             database.photosDao().insertAll(listPhotos.asDatabaseModel())
         }
     }
+
+    suspend fun saveLikesInDatabase(id: String, isLiked: Boolean) {
+        withContext(Dispatchers.IO) {
+            database.photosDao().saveLikesInDatabase(id, isLiked)
+        }
+    }
 }
