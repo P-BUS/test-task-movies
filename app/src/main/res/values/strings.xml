@@ -2,4 +2,6 @@
     <string name="app_name">TestTaskForE</string>
     <string name="unsplash_photos">Unsplash photos</string>
     <string name="selected_photo">Selected photo</string>
+    <string name="snackbar_favorite">Photo is added to favorites list</string>
+    <string name="action_text">VIEW</string>
 </resources>

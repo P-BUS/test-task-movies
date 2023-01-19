@@ -14,9 +14,9 @@
         android:layout_margin="@dimen/margin_large"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_detailed_image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/cardview_light_background"
+
         tools:src="@drawable/baseline_favorite_48" />
 
     <ImageView
@@ -26,9 +26,9 @@
         android:layout_margin="@dimen/margin_large"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_detailed_image"
-        app:tint="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
         tools:src="@drawable/baseline_share_48" />
 
     <ImageView

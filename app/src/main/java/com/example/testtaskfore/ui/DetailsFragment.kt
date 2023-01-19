@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
+import androidx.navigation.fragment.findNavController
 import com.example.testtaskfore.R
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.DetailsFragmentBinding
 import com.example.testtaskfore.utils.CoilImageLoader
+import com.example.testtaskfore.utils.SnackbarsUtils
+import com.google.android.material.snackbar.Snackbar
 
 class DetailsFragment : Fragment() {
     private val sharedViewModel: PhotoViewModel by activityViewModels()
-    private var isLiked: Boolean = false
     private lateinit var binding: DetailsFragmentBinding
 
 
@@ -31,6 +33,8 @@ class DetailsFragment : Fragment() {
         bindPhoto()
         binding.ivFavorite.setOnClickListener {
             onLikeClicked(sharedViewModel.currentPhoto)
+            showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT,
+                findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment))
         }
     }
 
@@ -66,6 +70,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun onLikeClicked(current_photo: LiveData<UnsplashPhoto>) {
+       var isLiked = false
         current_photo.value?.likedByUser?.let {
             isLiked = it
         }
@@ -74,6 +79,15 @@ class DetailsFragment : Fragment() {
             sharedViewModel.saveLikesInDatabase(it, isLiked)
         }
 
+    }
+
+    private fun showSnackbar(view: View, message: Int, length: Int, action: Unit) {
+        Snackbar
+            .make(view, message, length)
+            .setAction(R.string.action_text) {
+                action
+            }
+            .show()
     }
 
 }

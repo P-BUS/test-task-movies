@@ -19,5 +19,14 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.testtaskfore.ui.DetailsFragment"
         android:label="@string/selected_photo"
-        tools:layout="@layout/details_fragment" />
+        tools:layout="@layout/details_fragment" >
+        <action
+            android:id="@+id/action_detailsFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.testtaskfore.ui.FavoriteFragment"
+        android:label="favorite_fragment"
+        tools:layout="@layout/favorite_fragment" />
 </navigation>
