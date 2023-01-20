@@ -3,6 +3,7 @@
     <dimen name="image_high">132dp</dimen>
     <dimen name="margin_between_photos">4dp</dimen>
     <dimen name="margin_thin">2dp</dimen>
+    <dimen name="padding_thin">2dp</dimen>
     <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_large">16dp</dimen>

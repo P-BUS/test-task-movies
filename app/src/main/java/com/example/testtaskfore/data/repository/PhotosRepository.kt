@@ -22,6 +22,7 @@ class PhotosRepository @Inject constructor(
         database.photosDao().getAllPhotos()
             .map { it.asDomainModel() }
 
+
     val favoriteFhotos: Flow<List<UnsplashPhoto>> =
         database.photosDao().getAllFavoritePhotos(true)
             .map { it.asDomainModel() }
@@ -36,9 +37,20 @@ class PhotosRepository @Inject constructor(
         }
     }
 
+    suspend fun getSearchPhotos(searchQuery: String) {
+        withContext(Dispatchers.IO) {
+            // TODO: to add safe response handling if will be time
+            network.getSearchPhotos(searchQuery)
+        }
+    }
+
     suspend fun saveLikesInDatabase(id: String, isLiked: Boolean) {
         withContext(Dispatchers.IO) {
             database.photosDao().saveLikesInDatabase(id, isLiked)
         }
+    }
+
+    suspend fun deleteAllPhotos() {
+        database.photosDao().deleteAllPhotos()
     }
 }

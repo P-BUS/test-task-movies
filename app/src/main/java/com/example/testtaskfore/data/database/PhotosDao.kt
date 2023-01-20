@@ -1,6 +1,7 @@
 package com.example.testtaskfore.data.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
@@ -22,4 +23,7 @@ interface PhotosDao {
 
     @Upsert
     fun insertAll(photos: List<PhotosEntity>)
+
+    @Query("DELETE FROM photos_database")
+    fun deleteAllPhotos()
 }

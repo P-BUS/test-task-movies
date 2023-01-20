@@ -43,6 +43,19 @@ class PhotoViewModel @Inject constructor(
                 initialValue = listOf()
             )
 
+    // search photos steam form database
+    val searchPhotos: StateFlow<List<UnsplashPhoto>> =
+        repository.searchPhotos
+            // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
+            .retry(3) { e ->
+                (e is IOException).also { if (it) delay(1000) }
+            }
+            .stateIn(
+                scope = viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                initialValue = listOf()
+            )
+
     // favorites steam from database
     val favoritePhotos: StateFlow<List<UnsplashPhoto>> =
         repository.favoriteFhotos
