@@ -22,6 +22,10 @@ class PhotosRepository @Inject constructor(
         database.photosDao().getAllPhotos()
             .map { it.asDomainModel() }
 
+    val favoriteFhotos: Flow<List<UnsplashPhoto>> =
+        database.photosDao().getAllFavoritePhotos()
+            .map { it.asDomainModel() }
+
     suspend fun refreshPhotos() {
         withContext(Dispatchers.IO) {
             // Retrieve photos from network

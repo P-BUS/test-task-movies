@@ -1,5 +1,7 @@
 package com.example.testtaskfore.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,10 +67,23 @@ class DetailsFragment : Fragment() {
         }
 
         binding.ivShare.setOnClickListener {
-
+            lifecycleScope.launch {
+                sharedViewModel.currentPhoto
+                    .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                    .distinctUntilChanged()
+                    .collect { currentPhoto ->
+                        sendPhoto(currentPhoto.urls?.full.toString())
+                    }
+            }
         }
     }
 
+    private fun sendPhoto(url: String) {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+            .setType("image/*")
+            .putExtra(Intent.EXTRA_TEXT, url)
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_photo)))
+    }
     private fun bindPhoto(currentPhoto: UnsplashPhoto) {
         binding.ivShare.setImageResource(R.drawable.baseline_share_24)
         currentPhoto.urls?.full?.let {

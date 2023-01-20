@@ -9,9 +9,9 @@ import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.ItemViewBinding
 import com.example.testtaskfore.utils.CoilImageLoader
 
-class PhotoListAdapter(
+class FavoriteListAdapter(
     private val onItemClicked: (UnsplashPhoto) -> Unit
-) : ListAdapter<UnsplashPhoto, PhotoListAdapter.ListViewHolder>(DiffCallback) {
+) : ListAdapter<UnsplashPhoto, FavoriteListAdapter.ListViewHolder>(DiffCallback) {
 
     class ListViewHolder(private var binding: ItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {

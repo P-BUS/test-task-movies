@@ -42,6 +42,19 @@ class PhotoViewModel @Inject constructor(
                 initialValue = listOf()
             )
 
+    val favoritePhotos: StateFlow<List<UnsplashPhoto>> =
+        repository.photos
+            // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
+            .retry(3) { e ->
+                (e is IOException).also { if (it) delay(1000) }
+            }
+            .stateIn(
+                scope = viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                initialValue = listOf()
+            )
+
+
     private var _currentPhoto = MutableSharedFlow<UnsplashPhoto>(
         replay = 1,
         extraBufferCapacity = 0,

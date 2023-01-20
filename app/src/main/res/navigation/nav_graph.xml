@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -28,5 +31,12 @@
         android:id="@+id/favoriteFragment"
         android:name="com.example.testtaskfore.ui.FavoriteFragment"
         android:label="favorite_fragment"
-        tools:layout="@layout/favorite_fragment" />
+        tools:layout="@layout/favorite_fragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>

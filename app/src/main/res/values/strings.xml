@@ -5,4 +5,5 @@
     <string name="snackbar_favorite">Photo is added to favorites list</string>
     <string name="snackbar_no_favorite">Photo is removed from favorites list</string>
     <string name="action_text">VIEW</string>
+    <string name="share_photo">Share the photo</string>
 </resources>
