@@ -47,11 +47,11 @@ class ListFragment : Fragment() {
         val menuHost: MenuHost = requireActivity()
 
         // Search view
-        binding.svPhotoSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+/*        binding.searchMenuLayout.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // on below line we are checking
                 // if query exist or not.
-                if (programmingLanguagesList.contains(query)) {
+              *//*  if (programmingLanguagesList.contains(query)) {
                     // if query exist within list we
                     // are filtering our list adapter.
                     listAdapter.filter.filter(query)
@@ -60,7 +60,7 @@ class ListFragment : Fragment() {
                     // a toast message as no data found..
                     Toast.makeText(context, "No photos found..", Toast.LENGTH_LONG)
                         .show()
-                }
+                }*//*
                 return false
             }
 
@@ -68,10 +68,11 @@ class ListFragment : Fragment() {
                 // if query text is change in that case we
                 // are filtering our adapter with
                 // new text on below line.
-                listAdapter.filter.filter(newText)
+                //listAdapter.filter.filter(newText)
                 return false
             }
-        })
+        })*/
+
         // enable bottom navigation view
         val bottomNavigationView =
             activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -107,7 +108,7 @@ class ListFragment : Fragment() {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
                     R.id.search_menu_layout -> {
-                        // Sets isLinearLayoutManager (a Boolean) to the opposite value
+                     /*   // Sets isLinearLayoutManager (a Boolean) to the opposite value
                         isLinearLayoutManager = !isLinearLayoutManager
                         // Sets layout and icon
                         chooseLayout()
@@ -119,6 +120,7 @@ class ListFragment : Fragment() {
                                 //requireContext()
                             )
                         }
+                        true*/
                         true
                     }
 

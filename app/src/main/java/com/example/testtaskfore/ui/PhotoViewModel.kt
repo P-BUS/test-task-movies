@@ -43,19 +43,6 @@ class PhotoViewModel @Inject constructor(
                 initialValue = listOf()
             )
 
-    // search photos steam form database
-    val searchPhotos: StateFlow<List<UnsplashPhoto>> =
-        repository.searchPhotos
-            // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
-            .retry(3) { e ->
-                (e is IOException).also { if (it) delay(1000) }
-            }
-            .stateIn(
-                scope = viewModelScope,
-                SharingStarted.WhileSubscribed(5000),
-                initialValue = listOf()
-            )
-
     // favorites steam from database
     val favoritePhotos: StateFlow<List<UnsplashPhoto>> =
         repository.favoriteFhotos
@@ -89,6 +76,16 @@ class PhotoViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 repository.refreshPhotos()
+            } catch (networkError: IOException) {
+                Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
+            }
+        }
+    }
+
+    private fun refreshSearchDataFromRepository() {
+        viewModelScope.launch {
+            try {
+                repository.refreshSearchPhotos()
             } catch (networkError: IOException) {
                 Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
             }

@@ -11,13 +11,13 @@ data class PhotosEntity(
     @PrimaryKey
     val id: String,
     @ColumnInfo(name = "created_at")
-    val createdAt: String?,
+    val createdAt: String,
     val description: String?,
     @ColumnInfo(name = "alt_description")
     val altDescription: String?,
     @ColumnInfo(name = "liked_by_user")
     val likedByUser: Boolean?,
-    val likes: Int?,
-    val urls: Urls?,
-    val user: User?
+    val likes: Int,
+    val urls: Urls,
+    val user: User
 )

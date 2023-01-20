@@ -67,5 +67,10 @@ object NetworkModule {
             .setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-
+    @Singleton
+    @Provides
+    fun provideQuery(): String {
+        val string: String = "Summer"
+        return string
+    }
 }
