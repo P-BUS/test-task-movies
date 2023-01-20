@@ -1,9 +1,6 @@
 package com.example.testtaskfore.data.network
 
 import com.example.testtaskfore.data.model.UnsplashPhoto
-import com.example.testtaskfore.utils.Constants.ACCESS_KEY
-import com.example.testtaskfore.utils.Constants.ENDPOINT
-import com.example.testtaskfore.utils.Constants.SEARCH_ENDPOINT
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,11 +15,19 @@ interface PhotoApiService {
 
     @GET(SEARCH_ENDPOINT)
     suspend fun getSearchPhotos(
-        @Query("client_id") clientId: String = ACCESS_KEY,
         @Query("query") searchQuery: String,
+        @Query("client_id") clientId: String = ACCESS_KEY,
         @Query("page") pageNumber: Int = 3,
         @Query("per_page") itemsPerPage: Int = 20,
         @Query("order_by") sort: String = "popular"
     ): List<UnsplashPhoto>
+
+
+    companion object {
+        const val ENDPOINT = "photos"
+        const val SEARCH_ENDPOINT = "search/photos"
+        const val ACCESS_KEY = "cVHLHASj27DThAPTGCetJ3wj-1evc8lLk6dKF7TWAqE"
+        const val SECRET_KEY = "ZWEO8kwAEaQd74OFzq9HKxsqx3wwfv5hgL2efGaVr90"
+    }
 
 }

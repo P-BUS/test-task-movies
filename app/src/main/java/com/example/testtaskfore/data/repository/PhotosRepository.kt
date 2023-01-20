@@ -15,13 +15,13 @@ import javax.inject.Singleton
 @Singleton
 class PhotosRepository @Inject constructor(
     private val network: PhotoApiService,
-    private val database: AppDatabase
+    private val database: AppDatabase,
+    private val searchQuery: String
 ) {
 
     val photos: Flow<List<UnsplashPhoto>> =
         database.photosDao().getAllPhotos()
             .map { it.asDomainModel() }
-
 
     val favoriteFhotos: Flow<List<UnsplashPhoto>> =
         database.photosDao().getAllFavoritePhotos(true)
@@ -37,10 +37,18 @@ class PhotosRepository @Inject constructor(
         }
     }
 
-    suspend fun getSearchPhotos(searchQuery: String) {
+    suspend fun refreshSearchPhotos() {
         withContext(Dispatchers.IO) {
+            // Retrieve search photos from network
             // TODO: to add safe response handling if will be time
-            network.getSearchPhotos(searchQuery)
+            val listSearchPhotos: List<UnsplashPhoto> = network.getSearchPhotos(searchQuery)
+            // Update database if the search result is success
+            if (listSearchPhotos.isNullOrEmpty()) {
+                database.photosDao().apply {
+                    deleteAllPhotos()
+                    insertAll(listSearchPhotos.asDatabaseModel())
+                }
+            }
         }
     }
 
@@ -48,9 +56,5 @@ class PhotosRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             database.photosDao().saveLikesInDatabase(id, isLiked)
         }
-    }
-
-    suspend fun deleteAllPhotos() {
-        database.photosDao().deleteAllPhotos()
     }
 }

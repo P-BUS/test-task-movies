@@ -73,7 +73,8 @@ class ListFragment : Fragment() {
             }
         })
         // enable bottom navigation view
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView?.visibility = View.VISIBLE
 
         recyclerView = binding.recyclerView
@@ -105,7 +106,7 @@ class ListFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
-                    R.id.action_switch_layout -> {
+                    R.id.search_menu_layout -> {
                         // Sets isLinearLayoutManager (a Boolean) to the opposite value
                         isLinearLayoutManager = !isLinearLayoutManager
                         // Sets layout and icon
@@ -125,4 +126,5 @@ class ListFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
+    }
 }
