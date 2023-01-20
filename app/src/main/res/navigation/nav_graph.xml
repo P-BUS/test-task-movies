@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.testtaskfore.ui.FavoriteFragment"
-        android:label="favorite_fragment"
+        android:label="@string/favorite_photos"
         tools:layout="@layout/favorite_fragment" >
         <action
             android:id="@+id/action_favoriteFragment_to_detailsFragment"

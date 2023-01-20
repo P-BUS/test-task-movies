@@ -15,8 +15,7 @@
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_likes_quantity"
-        tools:layout_editor_absoluteY="544dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_image_description"
         tools:src="@drawable/ic_favorite" />
 
     <ImageView
@@ -27,7 +26,7 @@
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintEnd_toStartOf="@+id/iv_favorite"
-        app:layout_constraintTop_toBottomOf="@id/tv_likes_quantity"
+        app:layout_constraintTop_toBottomOf="@+id/tv_image_description"
         tools:src="@drawable/ic_share" />
 
     <ImageView
@@ -45,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_detailed_image"
         tools:text="Description of the image" />
@@ -73,10 +73,9 @@
         android:id="@+id/tv_likes_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginEnd="@dimen/margin_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_image_description"
+        android:layout_margin="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_created_date"
         tools:text="12 Likes" />
 
 

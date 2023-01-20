@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.ListFragmentBinding
 import com.example.testtaskfore.ui.adapters.PhotoListAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -35,6 +36,10 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // enable bottom navigation view
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView?.visibility = View.VISIBLE
 
         recyclerView = binding.recyclerView
         recyclerView.layoutManager =
