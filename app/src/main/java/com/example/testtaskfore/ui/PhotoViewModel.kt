@@ -43,7 +43,7 @@ class PhotoViewModel @Inject constructor(
             )
 
     val favoritePhotos: StateFlow<List<UnsplashPhoto>> =
-        repository.photos
+        repository.favoriteFhotos
             // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
             .retry(3) { e ->
                 (e is IOException).also { if (it) delay(1000) }

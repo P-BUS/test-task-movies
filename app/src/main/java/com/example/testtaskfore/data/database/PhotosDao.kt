@@ -11,8 +11,8 @@ interface PhotosDao {
     @Query("SELECT * FROM photos_database")
     fun getAllPhotos(): Flow<List<PhotosEntity>>
 
-    @Query("SELECT * FROM photos_database WHERE liked_by_user = 1")
-    fun getAllFavoritePhotos(): Flow<List<PhotosEntity>>
+    @Query("SELECT * FROM photos_database WHERE liked_by_user = :isLiked")
+    fun getAllFavoritePhotos(isLiked: Boolean): Flow<List<PhotosEntity>>
 
     @Query("SELECT * FROM photos_database WHERE id = :id")
     fun getPhoto(id: String): Flow<PhotosEntity>

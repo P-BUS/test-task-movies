@@ -23,7 +23,7 @@ class PhotosRepository @Inject constructor(
             .map { it.asDomainModel() }
 
     val favoriteFhotos: Flow<List<UnsplashPhoto>> =
-        database.photosDao().getAllFavoritePhotos()
+        database.photosDao().getAllFavoritePhotos(true)
             .map { it.asDomainModel() }
 
     suspend fun refreshPhotos() {
