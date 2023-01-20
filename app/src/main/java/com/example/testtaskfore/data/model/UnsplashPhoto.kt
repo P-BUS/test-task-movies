@@ -2,6 +2,7 @@ package com.example.testtaskfore.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 @JsonClass(generateAdapter = true)
 data class UnsplashPhoto(

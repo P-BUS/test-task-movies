@@ -1,6 +1,6 @@
 package com.example.testtaskfore.data.network
 
-import com.example.testtaskfore.data.model.utils.Constants.BASE_URL
+import com.example.testtaskfore.utils.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

@@ -8,9 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.data.repository.PhotosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -24,7 +30,6 @@ class PhotoViewModel @Inject constructor(
     private val repository: PhotosRepository
 ) : ViewModel() {
 
-
     val photos: StateFlow<List<UnsplashPhoto>> =
         repository.photos
             // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
@@ -37,9 +42,16 @@ class PhotoViewModel @Inject constructor(
                 initialValue = listOf()
             )
 
-    // TODO: change to StateFlow but what to choose for default value?
-    private val _currentPhoto = MutableLiveData<UnsplashPhoto>()
-    val currentPhoto: LiveData<UnsplashPhoto> = _currentPhoto
+    private var _currentPhoto = MutableSharedFlow<UnsplashPhoto>(
+        replay = 1,
+        extraBufferCapacity = 0,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val currentPhoto: SharedFlow<UnsplashPhoto> = _currentPhoto.asSharedFlow()
+
+
+    private val _isLiked = MutableStateFlow(false)
+    val isLiked: StateFlow<Boolean> = _isLiked.asStateFlow()
 
     init {
         refreshDataFromRepository()
@@ -56,7 +68,13 @@ class PhotoViewModel @Inject constructor(
     }
 
     fun updateCurrentPhoto(photo: UnsplashPhoto) {
-        _currentPhoto.value = photo
+        viewModelScope.launch {
+            _currentPhoto.emit(photo)
+        }
+    }
+
+    fun updateIsLiked(liked: Boolean) {
+        _isLiked.value = liked
     }
 
     fun saveLikesInDatabase(id: String, isLiked: Boolean) {

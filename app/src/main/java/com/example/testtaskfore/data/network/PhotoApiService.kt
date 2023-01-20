@@ -1,8 +1,8 @@
 package com.example.testtaskfore.data.network
 
 import com.example.testtaskfore.data.model.UnsplashPhoto
-import com.example.testtaskfore.data.model.utils.Constants.ACCESS_KEY
-import com.example.testtaskfore.data.model.utils.Constants.ENDPOINT
+import com.example.testtaskfore.utils.Constants.ACCESS_KEY
+import com.example.testtaskfore.utils.Constants.ENDPOINT
 import retrofit2.http.GET
 import retrofit2.http.Query
 

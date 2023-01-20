@@ -6,18 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.testtaskfore.R
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.DetailsFragmentBinding
-import com.example.testtaskfore.data.model.utils.CoilImageLoader
+import com.example.testtaskfore.utils.CoilImageLoader
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
 class DetailsFragment : Fragment() {
     private val sharedViewModel: PhotoViewModel by activityViewModels()
     private lateinit var binding: DetailsFragmentBinding
-
+    private var isLiked: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -28,56 +33,84 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // binds variables to elements of view
-        bindPhoto()
+
+
+        lifecycleScope.launch {
+            sharedViewModel.isLiked
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .distinctUntilChanged()
+                .collect { value ->
+                    isLiked = value
+                }
+        }
+
+        lifecycleScope.launch {
+            sharedViewModel.currentPhoto
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .distinctUntilChanged()
+                .collect { currentPhoto ->
+                    bindPhoto(currentPhoto)
+                }
+        }
+
         binding.ivFavorite.setOnClickListener {
             onLikeClicked(sharedViewModel.currentPhoto)
-            showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT
-            ) { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
+            if(isLiked) {
+                showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT)
+                { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
+            } else {
+                showSnackbar(binding.root, R.string.snackbar_no_favorite, Snackbar.LENGTH_SHORT)
+                { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
+            }
+        }
+
+        binding.ivShare.setOnClickListener {
+
         }
     }
 
-    private fun bindPhoto() {
-        with(sharedViewModel.currentPhoto.value) {
-            this?.urls?.full?.let {
+    private fun bindPhoto(currentPhoto: UnsplashPhoto) {
+        binding.ivShare.setImageResource(R.drawable.baseline_share_24)
+        currentPhoto.urls?.full?.let {
                 CoilImageLoader.loadImage(binding.ivDetailedImage, it)
             }
-            this?.description?.let {
+        currentPhoto.description?.let {
                 binding.tvImageDescription.text = it
             }
-            this?.user?.name?.let {
+        currentPhoto.user?.name?.let {
                 binding.tvAuthorName.text = it
             }
-            this?.createdAt?.let {
+        currentPhoto.createdAt?.let {
                 binding.tvCreatedDate.text = it
             }
-            this?.likes?.let {
+        currentPhoto.likes?.let {
                 binding.tvLikesQuantity.text = it.toString()
             }
-            this?.let {
-                setLikeImage(it)
-            }
+        currentPhoto.likedByUser?.let {liked ->
+            setLikeImage(liked)
         }
     }
 
-    private fun setLikeImage(current_photo: UnsplashPhoto) {
-        if (current_photo.likedByUser == true) {
-            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_48)
+    private fun setLikeImage(liked: Boolean) {
+        if (liked) {
+            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_24)
         } else {
-            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_border_48)
+            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
         }
     }
 
-    private fun onLikeClicked(current_photo: LiveData<UnsplashPhoto>) {
-       var isLiked = false
-        current_photo.value?.likedByUser?.let {
-            isLiked = it
-        }
+    private fun onLikeClicked(current_photo: SharedFlow<UnsplashPhoto>) {
         isLiked = !isLiked
-        current_photo.value?.id?.let {
-            sharedViewModel.saveLikesInDatabase(it, isLiked)
+        lifecycleScope.launch {
+            sharedViewModel.currentPhoto
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .distinctUntilChanged()
+                .collect { currentPhoto ->
+                    sharedViewModel.saveLikesInDatabase(currentPhoto.id, isLiked)
+                    sharedViewModel.updateIsLiked(isLiked)
+                    currentPhoto.likedByUser?.let { setLikeImage(it) }
+                }
         }
-
     }
 
     private fun showSnackbar(view: View, message: Int, length: Int, action: () -> Unit) {

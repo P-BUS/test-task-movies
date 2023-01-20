@@ -14,10 +14,9 @@
         android:layout_margin="@dimen/margin_large"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        tools:src="@drawable/baseline_favorite_48" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_image_description"
+        tools:src="@drawable/baseline_favorite_24" />
 
     <ImageView
         android:id="@+id/iv_share"
@@ -26,10 +25,9 @@
         android:layout_margin="@dimen/margin_large"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        tools:src="@drawable/baseline_share_48" />
+        app:layout_constraintEnd_toStartOf="@+id/iv_favorite"
+        app:layout_constraintTop_toBottomOf="@+id/tv_image_description"
+        tools:src="@drawable/baseline_share_24" />
 
     <ImageView
         android:id="@+id/iv_detailed_image"
@@ -56,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_image_description"
         tools:text="Anrew McCalister" />
 
@@ -65,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_author_name"
         tools:text="25/12/23" />
 
@@ -74,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_created_date"
         tools:text="12 Likes" />
 

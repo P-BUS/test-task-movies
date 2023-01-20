@@ -1,4 +1,4 @@
-package com.example.testtaskfore.data.model.utils
+package com.example.testtaskfore.utils
 
 object Constants {
 

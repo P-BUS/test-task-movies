@@ -1,4 +1,4 @@
-package com.example.testtaskfore.data.model.utils
+package com.example.testtaskfore.utils
 
 import androidx.room.TypeConverter
 import com.example.testtaskfore.data.model.Urls

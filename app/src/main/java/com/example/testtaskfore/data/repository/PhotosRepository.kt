@@ -3,8 +3,8 @@ package com.example.testtaskfore.data.repository
 import com.example.testtaskfore.data.database.AppDatabase
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.data.network.PhotoApiService
-import com.example.testtaskfore.data.model.utils.asDatabaseModel
-import com.example.testtaskfore.data.model.utils.asDomainModel
+import com.example.testtaskfore.utils.asDatabaseModel
+import com.example.testtaskfore.utils.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
