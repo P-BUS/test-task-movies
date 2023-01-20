@@ -1,7 +1,6 @@
 package com.example.testtaskfore.ui
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +42,7 @@ class DetailsFragment : Fragment() {
                 .distinctUntilChanged()
                 .collect { value ->
                     isLiked = value
+                    setLikeImage(value)
                 }
         }
 
@@ -85,7 +85,7 @@ class DetailsFragment : Fragment() {
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_photo)))
     }
     private fun bindPhoto(currentPhoto: UnsplashPhoto) {
-        binding.ivShare.setImageResource(R.drawable.baseline_share_24)
+        binding.ivShare.setImageResource(R.drawable.ic_share)
         currentPhoto.urls?.full?.let {
                 CoilImageLoader.loadImage(binding.ivDetailedImage, it)
             }
@@ -106,26 +106,29 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private fun setLikeImage(liked: Boolean) {
-        if (liked) {
-            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_24)
+    private fun setLikeImage(isLiked: Boolean) {
+        if (isLiked) {
+            binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
         } else {
-            binding.ivFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
+            binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
         }
     }
 
     private fun onLikeClicked(current_photo: SharedFlow<UnsplashPhoto>) {
         isLiked = !isLiked
         lifecycleScope.launch {
-            sharedViewModel.currentPhoto
+            current_photo
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .distinctUntilChanged()
                 .collect { currentPhoto ->
                     sharedViewModel.saveLikesInDatabase(currentPhoto.id, isLiked)
-                    sharedViewModel.updateIsLiked(isLiked)
-                    currentPhoto.likedByUser?.let { setLikeImage(it) }
+                    currentPhoto.likedByUser?.let {
+                        sharedViewModel.updateIsLiked(it)
+                    }
                 }
         }
+        //sharedViewModel.updateIsLiked(isLiked)
+        setLikeImage(isLiked)
     }
 
     private fun showSnackbar(view: View, message: Int, length: Int, action: () -> Unit) {

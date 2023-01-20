@@ -30,6 +30,7 @@ class PhotoViewModel @Inject constructor(
     private val repository: PhotosRepository
 ) : ViewModel() {
 
+    // photos steam form database
     val photos: StateFlow<List<UnsplashPhoto>> =
         repository.photos
             // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
@@ -42,6 +43,7 @@ class PhotoViewModel @Inject constructor(
                 initialValue = listOf()
             )
 
+    // favorites steam from database
     val favoritePhotos: StateFlow<List<UnsplashPhoto>> =
         repository.favoriteFhotos
             // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
