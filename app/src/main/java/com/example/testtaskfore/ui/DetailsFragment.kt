@@ -15,6 +15,7 @@ import com.example.testtaskfore.R
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.DetailsFragmentBinding
 import com.example.testtaskfore.utils.CoilImageLoader
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -34,6 +35,10 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // disable bottom navigation view
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView?.visibility = View.GONE
 
 
         lifecycleScope.launch {

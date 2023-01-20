@@ -6,4 +6,7 @@
     <string name="snackbar_no_favorite">Photo is removed from favorites list</string>
     <string name="action_text">VIEW</string>
     <string name="share_photo">Share the photo</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="empty">Empty</string>
 </resources>
