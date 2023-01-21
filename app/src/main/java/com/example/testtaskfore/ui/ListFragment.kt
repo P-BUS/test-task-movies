@@ -85,18 +85,7 @@ class ListFragment : Fragment() {
 
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                             override fun onQueryTextSubmit(query: String?): Boolean {
-                                // on below line we are checking
-                                // if query exist or not.
-                                if (programmingLanguagesList.contains(query)) {
-                                    // if query exist within list we
-                                    // are filtering our list adapter.
-                                    listAdapter.filter.filter(query)
-                                } else {
-                                    // if query is not present we are displaying
-                                    // a toast message as no data found..
-                                    Toast.makeText(context, "No photos found..", Toast.LENGTH_LONG)
-                                        .show()
-                                }
+
                                 return false
                             }
 

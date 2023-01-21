@@ -23,17 +23,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        handleIntent(intent)
     }
 
-    override fun onNewIntent(intent: Intent) {
-        handleIntent(intent)
-    }
 
-    private fun handleIntent(intent: Intent) {
-        if (Intent.ACTION_SEARCH == intent.action) {
-            val query = intent.getStringExtra(SearchManager.QUERY)
-            //use the query to search your data somehow
-        }
-    }
 }

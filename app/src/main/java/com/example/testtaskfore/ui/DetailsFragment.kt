@@ -100,9 +100,8 @@ class DetailsFragment : Fragment() {
         currentPhoto.user?.name?.let {
                 binding.tvAuthorName.text = it
             }
-        currentPhoto.createdAt?.let {
-                binding.tvCreatedDate.text = it
-            }
+        binding.tvCreatedDate.text = currentPhoto.createdDateFormatted
+
         currentPhoto.likes?.let {
                 binding.tvLikesQuantity.text = it.toString()
             }
