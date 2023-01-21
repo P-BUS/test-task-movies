@@ -1,14 +1,8 @@
 package com.example.testtaskfore.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -32,6 +26,7 @@ class ListFragment : Fragment() {
     private val sharedViewModel: PhotoViewModel by activityViewModels()
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,26 +96,19 @@ class ListFragment : Fragment() {
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 // Add menu items here
-                menuInflater.inflate(R.menu.menu_layout, menu)
+                menuInflater.inflate(R.menu.options_menu, menu)
+
+                val searchItem = menu.findItem(R.id.search_menu_layout)
+                val searchView = searchItem.actionView as SearchView
+                searchView.setOnQueryTextListener()
+
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
                     R.id.search_menu_layout -> {
-                     /*   // Sets isLinearLayoutManager (a Boolean) to the opposite value
-                        isLinearLayoutManager = !isLinearLayoutManager
-                        // Sets layout and icon
-                        chooseLayout()
-                        setIcon(menuItem)
-                        // Launches a coroutine and write the layout setting in the preference Datastore
-                        lifecycleScope.launch() {
-                            sharedViewModel.saveLayoutToPreferencesStore(
-                                isLinearLayoutManager
-                                //requireContext()
-                            )
-                        }
-                        true*/
+                        // put here what exactly should executed
                         true
                     }
 
@@ -128,5 +116,11 @@ class ListFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
+    }
+
+    // Avoid sending empty search string when fragment destroys
+    override fun onDestroyView() {
+        super.onDestroyView()
+        searchView.setOnQueryTextListener(null)
     }
 }
