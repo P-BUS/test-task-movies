@@ -76,6 +76,7 @@
         android:layout_margin="@dimen/margin_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_created_date"
+        android:text="@string/likes_quantity"
         tools:text="12 Likes" />
 
 

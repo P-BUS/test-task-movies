@@ -101,10 +101,8 @@ class DetailsFragment : Fragment() {
                 binding.tvAuthorName.text = it
             }
         binding.tvCreatedDate.text = currentPhoto.createdDateFormatted
+        binding.tvLikesQuantity.text = getString(R.string.likes_quantity, currentPhoto.likes)
 
-        currentPhoto.likes?.let {
-                binding.tvLikesQuantity.text = it.toString()
-            }
         currentPhoto.likedByUser?.let {liked ->
             setLikeImage(liked)
         }
