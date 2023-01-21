@@ -16,6 +16,7 @@ import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.FavoriteFragmentBinding
 import com.example.testtaskfore.ui.adapters.FavoriteListAdapter
 import com.example.testtaskfore.ui.adapters.PhotoListAdapter
+import com.example.testtaskfore.ui.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch

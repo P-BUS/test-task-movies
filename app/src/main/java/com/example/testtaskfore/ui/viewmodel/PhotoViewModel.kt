@@ -1,4 +1,4 @@
-package com.example.testtaskfore.ui
+package com.example.testtaskfore.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -64,7 +64,7 @@ class PhotoViewModel @Inject constructor(
     )
     val currentPhoto: SharedFlow<UnsplashPhoto> = _currentPhoto.asSharedFlow()
 
-    private val _searchQuery = MutableStateFlow("french bulldogs")
+    private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
 

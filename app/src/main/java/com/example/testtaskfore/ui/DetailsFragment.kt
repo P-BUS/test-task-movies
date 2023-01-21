@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.testtaskfore.R
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.DetailsFragmentBinding
+import com.example.testtaskfore.ui.viewmodel.PhotoViewModel
 import com.example.testtaskfore.utils.CoilImageLoader
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar

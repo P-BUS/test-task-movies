@@ -3,7 +3,6 @@ package com.example.testtaskfore.ui
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.ListFragmentBinding
 import com.example.testtaskfore.ui.adapters.PhotoListAdapter
+import com.example.testtaskfore.ui.viewmodel.PhotoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -77,20 +77,22 @@ class ListFragment : Fragment() {
 
                 // Keeps not finished query if fragment is recreated
                 val pendingQuery = sharedViewModel.searchQuery.value
-                if (pendingQuery != null && pendingQuery.isNotEmpty())
-                searchItem.expandActionView()
-                searchView.setQuery(pendingQuery, false)
+                if (pendingQuery != null && pendingQuery.isNotEmpty()) {
+                    searchItem.expandActionView()
+                    searchView.setQuery(pendingQuery, false)
+                }
 
-
-
+                // listen query submit by user or change text
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                            override fun onQueryTextSubmit(query: String?): Boolean {
-
-                                return false
-                            }
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        if (query != null) {
+                            sharedViewModel.updateSearchQuery(query)
+                        }
+                        return true
+                    }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        TODO("Not yet implemented")
+                        return true
                     }
                 })
             }
@@ -99,11 +101,9 @@ class ListFragment : Fragment() {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
                     R.id.search_menu_layout -> {
-                        // put here what exactly should executed
-
+                        // nothing to do in this case
                         true
                     }
-
                     else -> false
                 }
             }
