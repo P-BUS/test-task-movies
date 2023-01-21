@@ -1,5 +1,6 @@
 package com.example.testtaskfore.data.network
 
+import com.example.testtaskfore.data.model.PhotoResponse
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -9,7 +10,7 @@ interface PhotoApiService {
     suspend fun getPhotos(
         @Query("client_id") clientId: String = ACCESS_KEY,
         @Query("page") pageNumber: Int = 3,
-        @Query("per_page") itemsPerPage: Int = 20,
+        @Query("per_page") itemsPerPage: Int = 30,
         @Query("order_by") sort: String = "popular"
     ): List<UnsplashPhoto>
 
@@ -18,9 +19,9 @@ interface PhotoApiService {
         @Query("query") searchQuery: String,
         @Query("client_id") clientId: String = ACCESS_KEY,
         @Query("page") pageNumber: Int = 3,
-        @Query("per_page") itemsPerPage: Int = 20,
+        @Query("per_page") itemsPerPage: Int = 30,
         @Query("order_by") sort: String = "popular"
-    ): List<UnsplashPhoto>
+    ): PhotoResponse
 
 
     companion object {

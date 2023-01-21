@@ -1,15 +1,10 @@
 package com.example.testtaskfore.data.model
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.testtaskfore.utils.BASIC_DATE_TIME_FORMAT
 import com.example.testtaskfore.utils.Formatters
 import com.example.testtaskfore.utils.OUTPUT_FORMAT
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import kotlinx.coroutines.flow.MutableSharedFlow
-import java.text.DateFormat
-import java.time.LocalDate
 
 @JsonClass(generateAdapter = true)
 data class UnsplashPhoto(

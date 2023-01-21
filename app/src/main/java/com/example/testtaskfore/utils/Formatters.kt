@@ -3,7 +3,6 @@ package com.example.testtaskfore.utils
 import android.util.Log
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 const val BASIC_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"

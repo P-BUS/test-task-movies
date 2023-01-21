@@ -16,6 +16,7 @@ import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.databinding.DetailsFragmentBinding
 import com.example.testtaskfore.ui.viewmodel.PhotoViewModel
 import com.example.testtaskfore.utils.CoilImageLoader
+import com.example.testtaskfore.utils.SnackbarsUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.SharedFlow
@@ -41,7 +42,6 @@ class DetailsFragment : Fragment() {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView?.visibility = View.GONE
 
-
         lifecycleScope.launch {
             sharedViewModel.isLiked
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
@@ -64,10 +64,10 @@ class DetailsFragment : Fragment() {
         binding.ivFavorite.setOnClickListener {
             onLikeClicked(sharedViewModel.currentPhoto)
             if(isLiked) {
-                showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT)
+                SnackbarsUtils.showActionSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT)
                 { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
             } else {
-                showSnackbar(binding.root, R.string.snackbar_no_favorite, Snackbar.LENGTH_SHORT)
+                SnackbarsUtils.showActionSnackbar(binding.root, R.string.snackbar_no_favorite, Snackbar.LENGTH_SHORT)
                 { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
             }
         }
@@ -92,13 +92,13 @@ class DetailsFragment : Fragment() {
     }
     private fun bindPhoto(currentPhoto: UnsplashPhoto) {
         binding.ivShare.setImageResource(R.drawable.ic_share)
-        currentPhoto.urls?.full?.let {
+        currentPhoto.urls.full?.let {
                 CoilImageLoader.loadImage(binding.ivDetailedImage, it)
             }
         currentPhoto.description?.let {
                 binding.tvImageDescription.text = it
             }
-        currentPhoto.user?.name?.let {
+        currentPhoto.user.name?.let {
                 binding.tvAuthorName.text = it
             }
         binding.tvCreatedDate.text = currentPhoto.createdDateFormatted
@@ -133,14 +133,4 @@ class DetailsFragment : Fragment() {
         //sharedViewModel.updateIsLiked(isLiked)
         setLikeImage(isLiked)
     }
-
-    private fun showSnackbar(view: View, message: Int, length: Int, action: () -> Unit) {
-        Snackbar
-            .make(view, message, length)
-            .setAction(R.string.action_text) {
-                action()
-            }
-            .show()
-    }
-
 }

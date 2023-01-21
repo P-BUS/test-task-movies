@@ -45,5 +45,4 @@ class FavoriteListAdapter(
             return oldItem == newItem
         }
     }
-
 }

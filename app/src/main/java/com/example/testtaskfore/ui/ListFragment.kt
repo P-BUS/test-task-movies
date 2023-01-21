@@ -1,7 +1,6 @@
 package com.example.testtaskfore.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.core.view.MenuHost
@@ -18,12 +17,12 @@ import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.ListFragmentBinding
 import com.example.testtaskfore.ui.adapters.PhotoListAdapter
 import com.example.testtaskfore.ui.viewmodel.PhotoViewModel
-import com.example.testtaskfore.ui.viewmodel.TAG
+import com.example.testtaskfore.utils.SnackbarsUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -32,7 +31,6 @@ class ListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var searchQuery: String
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,9 +96,11 @@ class ListFragment : Fragment() {
                 // listen query submit by user or change text
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        if (query != null) {
+                        if (query != null && query.isNotEmpty()) {
                             sharedViewModel.updateSearchQuery(query)
                             sharedViewModel.refreshSearchPhotos(query)
+                        } else {
+                            SnackbarsUtils.showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT)
                         }
                         return true
                     }

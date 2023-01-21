@@ -40,7 +40,7 @@ class PhotosRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             // Retrieve search photos from network
             // TODO: to add safe response handling if will be time
-            val listSearchPhotos: List<UnsplashPhoto> = network.getSearchPhotos(searchQuery)
+            val listSearchPhotos: List<UnsplashPhoto> = network.getSearchPhotos(searchQuery).results
             // Update database if the search result is success
             if (listSearchPhotos.isNotEmpty()) {
                 database.photosDao().apply {

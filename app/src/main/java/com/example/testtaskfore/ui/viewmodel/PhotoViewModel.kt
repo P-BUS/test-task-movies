@@ -1,10 +1,7 @@
 package com.example.testtaskfore.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.data.repository.PhotosRepository
@@ -34,7 +31,6 @@ class PhotoViewModel @Inject constructor(
     // photos steam form database
     val photos: StateFlow<List<UnsplashPhoto>> =
         repository.photos
-            // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
             .retry(3) { e ->
                 (e is IOException).also { if (it) delay(1000) }
             }
@@ -47,7 +43,6 @@ class PhotoViewModel @Inject constructor(
     // favorites steam from database
     val favoritePhotos: StateFlow<List<UnsplashPhoto>> =
         repository.favoriteFhotos
-            // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
             .retry(3) { e ->
                 (e is IOException).also { if (it) delay(1000) }
             }
@@ -57,17 +52,11 @@ class PhotoViewModel @Inject constructor(
                 initialValue = listOf()
             )
 
-
-    private var _currentPhoto = MutableSharedFlow<UnsplashPhoto>(
-        replay = 1,
-        extraBufferCapacity = 0,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
-    )
+    private var _currentPhoto = MutableSharedFlow<UnsplashPhoto>(1, 0, BufferOverflow.DROP_OLDEST)
     val currentPhoto: SharedFlow<UnsplashPhoto> = _currentPhoto.asSharedFlow()
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
-
 
     private val _isLiked = MutableStateFlow(false)
     val isLiked: StateFlow<Boolean> = _isLiked.asStateFlow()
@@ -121,5 +110,4 @@ class PhotoViewModel @Inject constructor(
             }
         }
     }
-
 }
