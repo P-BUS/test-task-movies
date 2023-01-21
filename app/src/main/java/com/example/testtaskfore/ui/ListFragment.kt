@@ -1,6 +1,7 @@
 package com.example.testtaskfore.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.core.view.MenuHost
@@ -17,10 +18,12 @@ import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.ListFragmentBinding
 import com.example.testtaskfore.ui.adapters.PhotoListAdapter
 import com.example.testtaskfore.ui.viewmodel.PhotoViewModel
+import com.example.testtaskfore.ui.viewmodel.TAG
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -28,6 +31,8 @@ class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
+    private lateinit var searchQuery: String
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +71,14 @@ class ListFragment : Fragment() {
                 }
         }
 
+        lifecycleScope.launch {
+            sharedViewModel.searchQuery
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .distinctUntilChanged()
+                .collect {
+                    searchQuery = it
+                }
+        }
 
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -87,6 +100,13 @@ class ListFragment : Fragment() {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         if (query != null) {
                             sharedViewModel.updateSearchQuery(query)
+                            lifecycleScope.launch {
+                                try {
+                                    sharedViewModel.refreshSearchPhotos(searchQuery)
+                                } catch (networkError: IOException) {
+                                    Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
+                                }
+                            }
                         }
                         return true
                     }

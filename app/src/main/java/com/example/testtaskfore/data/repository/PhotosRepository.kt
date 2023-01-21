@@ -15,8 +15,7 @@ import javax.inject.Singleton
 @Singleton
 class PhotosRepository @Inject constructor(
     private val network: PhotoApiService,
-    private val database: AppDatabase,
-    private val searchQuery: String
+    private val database: AppDatabase
 ) {
 
     val photos: Flow<List<UnsplashPhoto>> =
@@ -37,13 +36,13 @@ class PhotosRepository @Inject constructor(
         }
     }
 
-    suspend fun refreshSearchPhotos() {
+    suspend fun refreshSearchPhotos(searchQuery: String) {
         withContext(Dispatchers.IO) {
             // Retrieve search photos from network
             // TODO: to add safe response handling if will be time
             val listSearchPhotos: List<UnsplashPhoto> = network.getSearchPhotos(searchQuery)
             // Update database if the search result is success
-            if (listSearchPhotos.isNullOrEmpty()) {
+            if (listSearchPhotos.isNotEmpty()) {
                 database.photosDao().apply {
                     deleteAllPhotos()
                     insertAll(listSearchPhotos.asDatabaseModel())

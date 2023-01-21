@@ -117,4 +117,8 @@ class PhotoViewModel @Inject constructor(
         }
     }
 
+    suspend fun refreshSearchPhotos(searchQuery: String) {
+        repository.refreshSearchPhotos(searchQuery)
+    }
+
 }
