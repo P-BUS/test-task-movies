@@ -16,6 +16,7 @@ import com.example.testtaskfore.R
 import com.example.testtaskfore.databinding.FavoriteFragmentBinding
 import com.example.testtaskfore.ui.adapters.FavoriteListAdapter
 import com.example.testtaskfore.ui.viewmodel.PhotoViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -36,6 +37,11 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // enable bottom navigation view
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView?.visibility = View.VISIBLE
 
         recyclerView = binding.recyclerViewFavorite
         recyclerView.layoutManager =

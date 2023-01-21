@@ -64,11 +64,9 @@ class DetailsFragment : Fragment() {
         binding.ivFavorite.setOnClickListener {
             onLikeClicked(sharedViewModel.currentPhoto)
             if(isLiked) {
-                SnackbarsUtils.showActionSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT)
-                { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
+                SnackbarsUtils.showSnackbar(binding.root, R.string.snackbar_favorite, Snackbar.LENGTH_SHORT)
             } else {
-                SnackbarsUtils.showActionSnackbar(binding.root, R.string.snackbar_no_favorite, Snackbar.LENGTH_SHORT)
-                { findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment) }
+                SnackbarsUtils.showSnackbar(binding.root, R.string.snackbar_no_favorite, Snackbar.LENGTH_SHORT)
             }
         }
 
