@@ -100,18 +100,15 @@ class ListFragment : Fragment() {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         if (query != null) {
                             sharedViewModel.updateSearchQuery(query)
-                            lifecycleScope.launch {
-                                try {
-                                    sharedViewModel.refreshSearchPhotos(searchQuery)
-                                } catch (networkError: IOException) {
-                                    Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
-                                }
-                            }
+                            sharedViewModel.refreshSearchPhotos(query)
                         }
                         return true
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
+                        if (newText != null) {
+                            sharedViewModel.updateSearchQuery(newText)
+                        }
                         return true
                     }
                 })

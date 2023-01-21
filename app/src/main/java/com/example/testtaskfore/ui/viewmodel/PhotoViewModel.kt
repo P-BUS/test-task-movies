@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.example.testtaskfore.data.model.UnsplashPhoto
 import com.example.testtaskfore.data.repository.PhotosRepository
@@ -85,16 +86,6 @@ class PhotoViewModel @Inject constructor(
         }
     }
 
-    private fun refreshSearchDataFromRepository() {
-        viewModelScope.launch {
-            try {
-                repository.refreshSearchPhotos()
-            } catch (networkError: IOException) {
-                Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
-            }
-        }
-    }
-
     fun updateSearchQuery(searchQuery: String) {
         viewModelScope.launch {
             _searchQuery.emit(searchQuery)
@@ -113,12 +104,22 @@ class PhotoViewModel @Inject constructor(
 
     fun saveLikesInDatabase(id: String, isLiked: Boolean) {
         viewModelScope.launch {
-            repository.saveLikesInDatabase(id, isLiked)
+            try {
+                repository.saveLikesInDatabase(id, isLiked)
+            } catch (networkError: IOException) {
+                Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
+            }
         }
     }
 
-    suspend fun refreshSearchPhotos(searchQuery: String) {
-        repository.refreshSearchPhotos(searchQuery)
+    fun refreshSearchPhotos(searchQuery: String) {
+        viewModelScope.launch {
+            try {
+                repository.refreshSearchPhotos(searchQuery)
+            } catch (networkError: IOException) {
+                Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
+            }
+        }
     }
 
 }
