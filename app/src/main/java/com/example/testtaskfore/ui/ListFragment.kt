@@ -3,6 +3,7 @@ package com.example.testtaskfore.ui
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -41,33 +42,6 @@ class ListFragment : Fragment() {
 
         val menuHost: MenuHost = requireActivity()
 
-        // Search view
-/*        binding.searchMenuLayout.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // on below line we are checking
-                // if query exist or not.
-              *//*  if (programmingLanguagesList.contains(query)) {
-                    // if query exist within list we
-                    // are filtering our list adapter.
-                    listAdapter.filter.filter(query)
-                } else {
-                    // if query is not present we are displaying
-                    // a toast message as no data found..
-                    Toast.makeText(context, "No photos found..", Toast.LENGTH_LONG)
-                        .show()
-                }*//*
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // if query text is change in that case we
-                // are filtering our adapter with
-                // new text on below line.
-                //listAdapter.filter.filter(newText)
-                return false
-            }
-        })*/
-
         // enable bottom navigation view
         val bottomNavigationView =
             activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -99,9 +73,37 @@ class ListFragment : Fragment() {
                 menuInflater.inflate(R.menu.options_menu, menu)
 
                 val searchItem = menu.findItem(R.id.search_menu_layout)
-                val searchView = searchItem.actionView as SearchView
-                searchView.setOnQueryTextListener()
+                searchView = searchItem.actionView as SearchView
 
+                // Keeps not finished query if fragment is recreated
+                val pendingQuery = sharedViewModel.searchQuery.value
+                if (pendingQuery != null && pendingQuery.isNotEmpty())
+                searchItem.expandActionView()
+                searchView.setQuery(pendingQuery, false)
+
+
+
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                // on below line we are checking
+                                // if query exist or not.
+                                if (programmingLanguagesList.contains(query)) {
+                                    // if query exist within list we
+                                    // are filtering our list adapter.
+                                    listAdapter.filter.filter(query)
+                                } else {
+                                    // if query is not present we are displaying
+                                    // a toast message as no data found..
+                                    Toast.makeText(context, "No photos found..", Toast.LENGTH_LONG)
+                                        .show()
+                                }
+                                return false
+                            }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        TODO("Not yet implemented")
+                    }
+                })
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -109,6 +111,7 @@ class ListFragment : Fragment() {
                 return when (menuItem.itemId) {
                     R.id.search_menu_layout -> {
                         // put here what exactly should executed
+
                         true
                     }
 

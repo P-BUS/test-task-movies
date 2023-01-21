@@ -64,6 +64,9 @@ class PhotoViewModel @Inject constructor(
     )
     val currentPhoto: SharedFlow<UnsplashPhoto> = _currentPhoto.asSharedFlow()
 
+    private val _searchQuery = MutableStateFlow("french bulldogs")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
 
     private val _isLiked = MutableStateFlow(false)
     val isLiked: StateFlow<Boolean> = _isLiked.asStateFlow()
@@ -89,6 +92,12 @@ class PhotoViewModel @Inject constructor(
             } catch (networkError: IOException) {
                 Log.e(TAG, "IO Exception $networkError, you might not have internet connection")
             }
+        }
+    }
+
+    fun updateSearchQuery(searchQuery: String) {
+        viewModelScope.launch {
+            _searchQuery.emit(searchQuery)
         }
     }
 
