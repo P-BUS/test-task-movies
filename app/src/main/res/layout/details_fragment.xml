@@ -18,21 +18,21 @@
 
     <TextView
         android:id="@+id/tv_movie_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="true"
         android:layout_margin="@dimen/margin_medium"
-        android:layout_marginTop="80dp"
+        android:textAllCaps="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_detailed_image"
-        tools:text="Description of the image" />
+        tools:text="Description of the movie" />
 
     <TextView
-        android:id="@+id/tv_image_description"
+        android:id="@+id/tv_movie_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
+        android:paddingEnd="@dimen/margin_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_movie_title"
         tools:text="Description of the image" />
@@ -47,7 +47,7 @@
         android:layout_marginTop="@dimen/margin_large"
         android:layout_margin="@dimen/margin_medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_image_description" />
+        app:layout_constraintTop_toBottomOf="@id/tv_movie_description" />
 
     <TextView
         android:id="@+id/tv_rating"

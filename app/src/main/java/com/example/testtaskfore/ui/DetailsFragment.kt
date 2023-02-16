@@ -43,7 +43,7 @@ class DetailsFragment : Fragment() {
     private fun bindMovie(currentMovie: MovieModel) {
         CoilImageLoader.loadImage(binding.ivDetailedImage, currentMovie.backdropPath)
         binding.tvMovieTitle.text = currentMovie.title
-        binding.tvImageDescription.text = currentMovie.overview
+        binding.tvMovieDescription.text = currentMovie.overview
         binding.tvRating.text = currentMovie.voteAverage.toString()
     }
 
