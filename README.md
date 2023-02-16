@@ -1,8 +1,8 @@
-# TestTaskForE
+# TestTask
 Test task before job interview
 
 Technology stack <br /> 
-API – https://unsplash.com/documentation <br /> 
+API – https://api.themoviedb.org <br /> 
 Network - Retrofit <br /> 
 Database - Room <br /> 
 Navigation - Jet Pack Navigation Component <br /> 
