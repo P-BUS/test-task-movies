@@ -13,7 +13,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-const val BASE_URL = "https://api.unsplash.com/"
+const val BASE_URL = "https://api.themoviedb.org/"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -21,10 +21,10 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providePhotoApiService(
+    fun provideMovieApiService(
         retrofit: Retrofit
-    ): PhotoApiService {
-        return retrofit.create(PhotoApiService::class.java)
+    ): MovieApiService {
+        return retrofit.create(MovieApiService::class.java)
     }
 
     @Singleton

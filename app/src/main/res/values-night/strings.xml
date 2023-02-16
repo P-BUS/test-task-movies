@@ -1,5 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="snackbar_favorite">Photo is added to favorites list</string>
-    <string name="search_menu">Search menu</string>
 </resources>

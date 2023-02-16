@@ -21,7 +21,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "photos_database"
+            "movies_database"
         )
             .fallbackToDestructiveMigration()
             .build()
@@ -31,8 +31,8 @@ object DatabaseModule {
     @InstallIn(SingletonComponent::class)
     object DaoModule {
         @Provides
-        fun providePhotosDao(database: AppDatabase): PhotosDao {
-            return database.photosDao()
+        fun providePhotosDao(database: AppDatabase): MovieDao {
+            return database.movieDao()
         }
     }
 }

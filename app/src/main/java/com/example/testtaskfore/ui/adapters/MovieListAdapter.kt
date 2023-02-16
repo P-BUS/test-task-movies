@@ -5,20 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testtaskfore.data.model.UnsplashPhoto
+import com.example.testtaskfore.data.model.MovieModel
 import com.example.testtaskfore.databinding.ItemViewBinding
 import com.example.testtaskfore.utils.CoilImageLoader
 
-class FavoriteListAdapter(
-    private val onItemClicked: (UnsplashPhoto) -> Unit
-) : ListAdapter<UnsplashPhoto, FavoriteListAdapter.ListViewHolder>(DiffCallback) {
+class MovieListAdapter(
+    private val onItemClicked: (MovieModel) -> Unit
+) : ListAdapter<MovieModel, MovieListAdapter.ListViewHolder>(DiffCallback) {
 
     class ListViewHolder(private var binding: ItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(photo: UnsplashPhoto) {
-                photo.urls?.small?.let {
-                    CoilImageLoader.loadImage(binding.unsplashImage, it)
-                }
+            fun bind(movie: MovieModel) {
+                binding.movieName.text = movie.title
+                CoilImageLoader.loadImage(binding.posterImage, movie.posterPath)
             }
         }
 
@@ -37,12 +36,13 @@ class FavoriteListAdapter(
         holder.bind(getItem(position))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<UnsplashPhoto>() {
-        override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<MovieModel>() {
+        override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
             return oldItem.id == newItem.id
         }
-        override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean {
+        override fun areContentsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
             return oldItem == newItem
         }
     }
+
 }
